@@ -29,6 +29,8 @@
  * SUCH DAMAGE.
  */
 
+#ifndef _WIN32
+
 #include <sys/stat.h>
 #include <sys/types.h>
 
@@ -1052,3 +1054,5 @@ bail:
 	errno = oerrno;
 	return (ret);
 }
+
+#endif /* _WIN32 */

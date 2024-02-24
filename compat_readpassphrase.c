@@ -22,6 +22,8 @@
  * Materiel Command, USAF, under agreement number F39502-99-1-0512.
  */
 
+#ifndef _WIN32
+
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -192,3 +194,5 @@ restart:
 		errno = save_errno;
 	return(nr == -1 ? NULL : buf);
 }
+
+#endif /* _WIN32 */

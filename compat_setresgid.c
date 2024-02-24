@@ -14,6 +14,8 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#ifndef _WIN32
+
 #include <sys/types.h>
 #include <unistd.h>
 
@@ -30,3 +32,5 @@ setresgid(gid_t rgid, gid_t egid, gid_t sgid)
 
 	return 0;
 }
+
+#endif /* _WIN32 */

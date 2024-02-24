@@ -555,6 +555,8 @@ explicit_bzero(void *p, size_t n)
  * SUCH DAMAGE.
  */
 
+#ifndef _WIN32
+
 #include <sys/stat.h>
 #include <sys/types.h>
 
@@ -1578,6 +1580,8 @@ bail:
 	errno = oerrno;
 	return (ret);
 }
+
+#endif /* _WIN32 */
 #endif /* !HAVE_FTS */
 #if !HAVE_GETPROGNAME
 /*
@@ -2035,6 +2039,8 @@ memrchr(const void *s, int c, size_t n)
 #if !HAVE_MKFIFOAT
 #include <sys/stat.h>
 
+#ifndef _WIN32
+
 #include <errno.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -2077,9 +2083,13 @@ out:
 	errno = er;
 	return -1;
 }
+
+#endif /* _WIN32 */
 #endif /* !HAVE_MKFIFOAT */
 #if !HAVE_MKNODAT
 #include <sys/stat.h>
+
+#ifndef _WIN32
 
 #include <errno.h>
 #include <fcntl.h>
@@ -2124,6 +2134,8 @@ out:
 	errno = er;
 	return -1;
 }
+
+#endif /* _WIN32 */
 #endif /* !HAVE_MKNODAT */
 #if !HAVE_READPASSPHRASE
 /* 
@@ -2149,6 +2161,8 @@ out:
  * Agency (DARPA) and Air Force Research Laboratory, Air Force
  * Materiel Command, USAF, under agreement number F39502-99-1-0512.
  */
+
+#ifndef _WIN32
 
 #include <ctype.h>
 #include <errno.h>
@@ -2320,6 +2334,8 @@ restart:
 		errno = save_errno;
 	return(nr == -1 ? NULL : buf);
 }
+
+#endif /* _WIN32 */
 #endif /* !HAVE_READPASSPHRASE */
 #if !HAVE_REALLOCARRAY
 /*
@@ -2738,6 +2754,8 @@ fmt_scaled(long long number, char *result)
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#ifndef _WIN32
+
 #include <sys/types.h>
 #include <unistd.h>
 
@@ -2754,6 +2772,8 @@ setresgid(gid_t rgid, gid_t egid, gid_t sgid)
 
 	return 0;
 }
+
+#endif /* _WIN32 */
 #endif /* !HAVE_SETRESGID */
 #if !HAVE_SETRESUID
 /*
@@ -2771,6 +2791,8 @@ setresgid(gid_t rgid, gid_t egid, gid_t sgid)
  * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
+
+#ifndef _WIN32
 
 #include <sys/types.h>
 
@@ -2816,6 +2838,8 @@ setresuid(uid_t ruid, uid_t euid, uid_t suid)
 
 	return ret;
 }
+
+#endif /* _WIN32 */
 #endif /* !HAVE_SETRESUID */
 #if !HAVE_SHA2
 /*	$OpenBSD$	*/

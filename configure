@@ -723,6 +723,8 @@ cat << __HEREDOC__
 # define COMPAT_ENDIAN_H <libkern/OSByteOrder.h>
 #elif HAVE_SYS_BYTEORDER_H
 # define COMPAT_ENDIAN_H <sys/byteorder.h>
+#elif defined(_WIN32)
+/* No endian.h support. */
 #else
 # warning No suitable endian.h could be found.
 # warning Please e-mail the maintainers with your OS.

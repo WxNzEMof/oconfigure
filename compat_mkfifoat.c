@@ -1,5 +1,7 @@
 #include <sys/stat.h>
 
+#ifndef _WIN32
+
 #include <errno.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -42,3 +44,5 @@ out:
 	errno = er;
 	return -1;
 }
+
+#endif /* _WIN32 */

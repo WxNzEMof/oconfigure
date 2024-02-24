@@ -14,6 +14,8 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#ifndef _WIN32
+
 #include <sys/types.h>
 
 #include <errno.h>
@@ -58,3 +60,5 @@ setresuid(uid_t ruid, uid_t euid, uid_t suid)
 
 	return ret;
 }
+
+#endif /* _WIN32 */

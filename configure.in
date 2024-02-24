@@ -285,6 +285,7 @@ HAVE_SYS_SYSMACROS=
 HAVE_SYS_TREE=
 HAVE_SYSTRACE=0
 HAVE_TERMIOS=
+HAVE_UID_GID=
 HAVE_UNVEIL=
 HAVE_WAIT_ANY=
 HAVE___PROGNAME=
@@ -456,6 +457,7 @@ runtest sys_queue	SYS_QUEUE			  || true
 runtest sys_tree	SYS_TREE			  || true
 runtest termios		TERMIOS				  || true
 runtest unveil		UNVEIL				  || true
+runtest uid_gid		UID_GID				  || true
 runtest WAIT_ANY	WAIT_ANY			  || true
 runtest __progname	__PROGNAME			  || true
 
@@ -529,6 +531,12 @@ if [ ${HAVE_FTS} -eq 0 -o \
      ${HAVE_STRNLEN} -eq 0 ]
 then
 	echo "#include <sys/types.h> /* size_t, mode_t, dev_t */ "
+	echo
+fi
+
+if [ ${HAVE_UID_GID} -eq 0 ]
+then
+	echo "#include <sys/stat.h> /* struct stat */"
 	echo
 fi
 
@@ -618,6 +626,7 @@ cat << __HEREDOC__
 #define HAVE_SYS_SYSMACROS_H ${HAVE_SYS_SYSMACROS_H}
 #define HAVE_SYS_TREE ${HAVE_SYS_TREE}
 #define HAVE_SYSTRACE ${HAVE_SYSTRACE}
+#define HAVE_UID_GID ${HAVE_UID_GID}
 #define HAVE_UNVEIL ${HAVE_UNVEIL}
 #define HAVE_TERMIOS ${HAVE_TERMIOS}
 #define HAVE_WAIT_ANY ${HAVE_WAIT_ANY}
@@ -1041,6 +1050,14 @@ __HEREDOC__
 int mknodat(int, const char *, mode_t, dev_t);
 
 __HEREDOC__
+
+if [ ${HAVE_UID_GID} -eq 0 ]; then
+	cat << __HEREDOC__
+typedef __typeof((*((struct stat*)0)).st_uid) uid_t;
+typedef __typeof((*((struct stat*)0)).st_gid) gid_t;
+
+__HEREDOC__
+fi
 
 [ ${HAVE_SETRESGID} -eq 0 ] && \
 	cat << __HEREDOC__

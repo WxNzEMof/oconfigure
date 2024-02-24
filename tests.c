@@ -747,6 +747,17 @@ main(void)
 	return size.ws_col;
 }
 #endif /* TEST_TERMIOS */
+#if TEST_UID_GID
+#include <sys/stat.h>
+
+int
+main(void)
+{
+	uid_t uid;
+	gid_t gid;
+	return 0;
+}
+#endif /* TEST_UID_GID */
 #if TEST_UNVEIL
 #include <unistd.h>
 

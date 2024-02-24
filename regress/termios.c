@@ -1,5 +1,6 @@
 #include "../config.h"
 
+#ifndef _WIN32
 #include <sys/ioctl.h>
 #include <errno.h>
 #include <string.h>
@@ -19,3 +20,6 @@ main(void)
 #endif
 	return 0;
 }
+#else
+int main(void) { return 0; }
+#endif /* _WIN32 */

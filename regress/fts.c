@@ -1,5 +1,6 @@
 #include "../config.h"
 
+#ifndef _WIN32
 #if HAVE_FTS
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -39,3 +40,6 @@ main(void)
 
 	return 0;
 }
+#else
+int main(void) { return 0; }
+#endif /* _WIN32 */

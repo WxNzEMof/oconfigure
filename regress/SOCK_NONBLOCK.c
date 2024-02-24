@@ -1,5 +1,6 @@
 #include "../config.h"
 
+#ifndef _WIN32
 #include <sys/socket.h> /* socketpair */
 
 #if !HAVE_SOCK_NONBLOCK
@@ -27,3 +28,6 @@ main(void)
 	return 0;
 
 }
+#else
+int main(void) { return 0; }
+#endif /* _WIN32 */

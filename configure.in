@@ -209,6 +209,27 @@ then
 	rm -f "$test_soname" "${test_soname}.*"
 fi
 
+# Detect object and executable suffix.
+
+dir=$(mktemp -d)
+OBJEXT=$(
+	cd "$dir"
+	echo 'int main() { return 0; }' > "$dir"/test.c
+	"${CC}" -c test.c 1>&2
+	rm test.c
+	ls | sed s/test//
+)
+EXEEXT=$(
+	cd "$dir"
+	echo 'int main() { return 0; }' > "$dir"/test.c
+	"${CC}" -c test.c 1>&2
+	rm test.c
+	"${CC}" test"$OBJEXT" -o test 1>&2
+	rm test"$OBJEXT"
+	ls | sed s/test//
+)
+rm -r "$dir"
+
 #----------------------------------------------------------------------
 # These are the values that will be pushed into config.h after we test
 # for whether they're supported or not.
@@ -355,7 +376,7 @@ __HEREDOC__
 	echo "${1}: yes ${extralib}" 1>&3
 	echo 1>&3
 	eval HAVE_${2}=1
-	rm "test-${1}"
+	rm "test-${1}${EXEEXT}"
 	return 0
 }
 
@@ -1195,6 +1216,8 @@ SBINDIR		 = ${SBINDIR}
 INCLUDEDIR	 = ${INCLUDEDIR}
 LIBDIR		 = ${LIBDIR}
 MANDIR		 = ${MANDIR}
+OBJEXT		 = ${OBJEXT}
+EXEEXT		 = ${EXEEXT}
 INSTALL		 = ${INSTALL}
 INSTALL_PROGRAM	 = ${INSTALL_PROGRAM}
 INSTALL_LIB	 = ${INSTALL_LIB}

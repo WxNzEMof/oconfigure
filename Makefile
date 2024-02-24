@@ -44,51 +44,52 @@ REGRESS			= $(REGRESS_B64) \
 			  $(REGRESS_NODEP) \
 			  $(REGRESS_SCAN_SCALED) \
 			  $(REGRESS_SHA2)
+REGRESS_EXE = ${REGRESS:S/$/${EXEEXT}/}
 
-all: $(REGRESS)
+all: $(REGRESS_EXE)
 
 distcheck:
 	$(MAKE) -f Makefile.regen distcheck
 
 .for r in $(REGRESS_NODEP)
-${r}: ${r}.c compats.o config.h
+${r}${EXEEXT}: ${r}.c compats.o config.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ ${r}.c compats.o $(LDFLAGS)
 .endfor
 
 .for r in $(REGRESS_LIB_SOCKET)
-${r}: ${r}.c compats.o config.h
+${r}${EXEEXT}: ${r}.c compats.o config.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ ${r}.c compats.o $(LDADD_LIB_SOCKET) $(LDFLAGS)
 .endfor
 
 .for r in $(REGRESS_MD5)
-${r}: ${r}.c compats.o config.h
+${r}${EXEEXT}: ${r}.c compats.o config.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ ${r}.c compats.o $(LDADD_MD5) $(LDFLAGS)
 .endfor
 
 .for r in $(REGRESS_SHA2)
-${r}: ${r}.c compats.o config.h
+${r}${EXEEXT}: ${r}.c compats.o config.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ ${r}.c compats.o $(LDADD_SHA2) $(LDFLAGS)
 .endfor
 
 .for r in $(REGRESS_SCAN_SCALED)
-${r}: ${r}.c compats.o config.h
+${r}${EXEEXT}: ${r}.c compats.o config.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ ${r}.c compats.o $(LDADD_SCAN_SCALED) $(LDFLAGS)
 .endfor
 
 .for r in $(REGRESS_B64)
-${r}: ${r}.c compats.o config.h
+${r}${EXEEXT}: ${r}.c compats.o config.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ ${r}.c compats.o $(LDADD_B64_NTOP) $(LDFLAGS)
 .endfor
 
 .for r in $(REGRESS_CRYPT)
-${r}: ${r}.c compats.o config.h
+${r}${EXEEXT}: ${r}.c compats.o config.h
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ ${r}.c compats.o $(LDADD_CRYPT) $(LDFLAGS)
 .endfor
 
 install:
 	# Do nothing.
 
-regress: $(REGRESS)
+regress: $(REGRESS_EXE)
 	rm -rf .regress
 	mkdir .regress
 	cp configure tests.c .regress
@@ -98,7 +99,7 @@ regress: $(REGRESS)
 	do \
 		printf "%s... " "$$f" ; \
 		set +e ; \
-		./$$f 2>/dev/null ; \
+		./$$f$(EXEEXT) 2>/dev/null ; \
 		if [ $$? -ne 0 ]; then \
 			echo "FAIL"; \
 			exit 1 ; \

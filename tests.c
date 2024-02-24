@@ -335,6 +335,16 @@ int main(void) {
 	return 0;
 }
 #endif /* TEST_MKNODAT */
+#if TEST_NLINK_T
+#include <sys/stat.h>
+
+int
+main(void)
+{
+	nlink_t nlink;
+	return 0;
+}
+#endif /* TEST_NLINK_T */
 #if TEST_OSBYTEORDER_H
 #include <libkern/OSByteOrder.h>
 

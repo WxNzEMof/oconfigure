@@ -44,6 +44,7 @@ TESTS	= test-__progname.c \
 	  test-memset_s.c \
 	  test-mkfifoat.c \
 	  test-mknodat.c \
+	  test-nlink_t.c \
 	  test-osbyteorder_h.c \
 	  test-PATH_MAX.c \
 	  test-pledge.c \

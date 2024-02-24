@@ -257,6 +257,7 @@ HAVE_MEMRCHR=
 HAVE_MEMSET_S=
 HAVE_MKFIFOAT=
 HAVE_MKNODAT=
+HAVE_NLINK_T=
 HAVE_OSBYTEORDER_H=
 HAVE_PATH_MAX=
 HAVE_PLEDGE=
@@ -429,6 +430,7 @@ runtest memrchr		MEMRCHR			  	  || true
 runtest memset_s	MEMSET_S			  || true
 runtest mkfifoat	MKFIFOAT			  || true
 runtest mknodat		MKNODAT				  || true
+runtest nlink_t		NLINK_T				  || true
 runtest osbyteorder_h	OSBYTEORDER_H			  || true
 runtest PATH_MAX	PATH_MAX			  || true
 runtest pledge		PLEDGE				  || true
@@ -540,6 +542,12 @@ then
 	echo
 fi
 
+if [ ${HAVE_NLINK_T} -eq 0 ]
+then
+	echo "#include <sys/stat.h> /* struct stat */"
+	echo
+fi
+
 if [ ${HAVE_MD5} -eq 0 -o \
      ${HAVE_SHA2} -eq 0 ]
 then
@@ -599,6 +607,7 @@ cat << __HEREDOC__
 #define HAVE_MEMSET_S ${HAVE_MEMSET_S}
 #define HAVE_MKFIFOAT ${HAVE_MKFIFOAT}
 #define HAVE_MKNODAT ${HAVE_MKNODAT}
+#define HAVE_NLINK_T ${HAVE_NLINK_T}
 #define HAVE_OSBYTEORDER_H ${HAVE_OSBYTEORDER_H}
 #define HAVE_PATH_MAX ${HAVE_PATH_MAX}
 #define HAVE_PLEDGE ${HAVE_PLEDGE}
@@ -1055,6 +1064,13 @@ if [ ${HAVE_UID_GID} -eq 0 ]; then
 	cat << __HEREDOC__
 typedef __typeof((*((struct stat*)0)).st_uid) uid_t;
 typedef __typeof((*((struct stat*)0)).st_gid) gid_t;
+
+__HEREDOC__
+fi
+
+if [ ${HAVE_NLINK_T} -eq 0 ]; then
+	cat << __HEREDOC__
+typedef __typeof((*((struct stat*)0)).st_nlink) nlink_t;
 
 __HEREDOC__
 fi

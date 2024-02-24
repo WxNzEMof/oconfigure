@@ -41,6 +41,30 @@ getprogname(void)
 
 	return (__progname);
 }
+#elif defined(WIN32)
+#include <windows.h>
+const char *
+getprogname(void)
+{
+	char fullpath[MAX_PATH];
+
+	if (GetModuleFileName(NULL, fullpath, MAX_PATH) == 0)
+		return NULL;
+
+	char *filename = strrchr(fullpath, '\\');
+	if (filename == NULL) {
+		filename = fullpath;
+	} else {
+		filename++;
+	}
+
+	char *dot = strrchr(filename, '.');
+	if (dot != NULL) {
+		*dot = '\0';
+	}
+
+	return filename;
+}
 #else
 #error No getprogname available.
 #endif

@@ -211,15 +211,7 @@ warnx(const char *fmt, ...)
  * IF IBM IS APPRISED OF THE POSSIBILITY OF SUCH DAMAGES.
  */
 
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <arpa/nameser.h>
-
 #include <ctype.h>
-#include <resolv.h>
-#include <stdio.h>
 
 #include <stdlib.h>
 #include <string.h>

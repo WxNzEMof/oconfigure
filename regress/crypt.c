@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h> /* strcmp */
 #include <unistd.h>
+#include <stdio.h>
 
 #if HAVE_CRYPT
 /*
@@ -58,7 +59,7 @@ main(void)
 
 	/* Compare the hash and the password. */
 
-	result = crypt("this_is_a_pasword", hash);
+	result = crypt("this_is_a_password", strdup(hash));
 	return strcmp(result, hash) == 0 ? 0 : 1;
 }
 

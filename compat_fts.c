@@ -55,7 +55,7 @@ static size_t	 fts_maxarglen(char * const *);
 static void	 fts_padjust(FTS *, FTSENT *);
 static int	 fts_palloc(FTS *, size_t);
 static FTSENT	*fts_sort(FTS *, FTSENT *, int);
-static u_short	 fts_stat(FTS *, FTSENT *, int, int);
+static unsigned short	 fts_stat(FTS *, FTSENT *, int, int);
 static int	 fts_safe_changedir(FTS *, FTSENT *, int, char *);
 
 /* oconfigure: Prefix with FTS_. */
@@ -794,7 +794,7 @@ mem1:				saved_errno = errno;
 	return (head);
 }
 
-static u_short
+static unsigned short
 fts_stat(FTS *sp, FTSENT *p, int follow, int dfd)
 {
 	FTSENT *t;

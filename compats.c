@@ -292,11 +292,11 @@ static const char b64_Pad64 = '=';
    */
 
 int
-b64_ntop(u_char const *src, size_t srclength, char *target, size_t targsize)
+b64_ntop(unsigned char const *src, size_t srclength, char *target, size_t targsize)
 {
 	size_t datalength = 0;
-	u_char input[3];
-	u_char output[4];
+	unsigned char input[3];
+	unsigned char output[4];
 	size_t i;
 
 	while (2 < srclength) {
@@ -352,11 +352,11 @@ b64_ntop(u_char const *src, size_t srclength, char *target, size_t targsize)
  */
 
 int
-b64_pton(char const *src, u_char *target, size_t targsize)
+b64_pton(char const *src, unsigned char *target, size_t targsize)
 {
 	int state, ch;
 	size_t tarindex;
-	u_char nextbyte;
+	unsigned char nextbyte;
 	char *pos;
 
 	state = 0;
@@ -3771,7 +3771,7 @@ char *
 SHA256FileChunk(const char *filename, char *buf, off_t off, off_t len)
 {
 	struct stat sb;
-	u_char buffer[BUFSIZ];
+	unsigned char buffer[BUFSIZ];
 	SHA2_CTX ctx;
 	int fd, save_errno;
 	ssize_t nr;
@@ -3818,7 +3818,7 @@ char *
 SHA384FileChunk(const char *filename, char *buf, off_t off, off_t len)
 {
 	struct stat sb;
-	u_char buffer[BUFSIZ];
+	unsigned char buffer[BUFSIZ];
 	SHA2_CTX ctx;
 	int fd, save_errno;
 	ssize_t nr;
@@ -3865,7 +3865,7 @@ char *
 SHA512FileChunk(const char *filename, char *buf, off_t off, off_t len)
 {
 	struct stat sb;
-	u_char buffer[BUFSIZ];
+	unsigned char buffer[BUFSIZ];
 	SHA2_CTX ctx;
 	int fd, save_errno;
 	ssize_t nr;
@@ -3909,7 +3909,7 @@ SHA512File(const char *filename, char *buf)
 }
 
 char *
-SHA256Data(const u_char *data, size_t len, char *buf)
+SHA256Data(const unsigned char *data, size_t len, char *buf)
 {
 	SHA2_CTX ctx;
 
@@ -3919,7 +3919,7 @@ SHA256Data(const u_char *data, size_t len, char *buf)
 }
 
 char *
-SHA384Data(const u_char *data, size_t len, char *buf)
+SHA384Data(const unsigned char *data, size_t len, char *buf)
 {
 	SHA2_CTX ctx;
 
@@ -3929,7 +3929,7 @@ SHA384Data(const u_char *data, size_t len, char *buf)
 }
 
 char *
-SHA512Data(const u_char *data, size_t len, char *buf)
+SHA512Data(const unsigned char *data, size_t len, char *buf)
 {
 	SHA2_CTX ctx;
 

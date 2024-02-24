@@ -967,7 +967,7 @@ char *
 SHA256FileChunk(const char *filename, char *buf, off_t off, off_t len)
 {
 	struct stat sb;
-	u_char buffer[BUFSIZ];
+	unsigned char buffer[BUFSIZ];
 	SHA2_CTX ctx;
 	int fd, save_errno;
 	ssize_t nr;
@@ -1014,7 +1014,7 @@ char *
 SHA384FileChunk(const char *filename, char *buf, off_t off, off_t len)
 {
 	struct stat sb;
-	u_char buffer[BUFSIZ];
+	unsigned char buffer[BUFSIZ];
 	SHA2_CTX ctx;
 	int fd, save_errno;
 	ssize_t nr;
@@ -1061,7 +1061,7 @@ char *
 SHA512FileChunk(const char *filename, char *buf, off_t off, off_t len)
 {
 	struct stat sb;
-	u_char buffer[BUFSIZ];
+	unsigned char buffer[BUFSIZ];
 	SHA2_CTX ctx;
 	int fd, save_errno;
 	ssize_t nr;
@@ -1105,7 +1105,7 @@ SHA512File(const char *filename, char *buf)
 }
 
 char *
-SHA256Data(const u_char *data, size_t len, char *buf)
+SHA256Data(const unsigned char *data, size_t len, char *buf)
 {
 	SHA2_CTX ctx;
 
@@ -1115,7 +1115,7 @@ SHA256Data(const u_char *data, size_t len, char *buf)
 }
 
 char *
-SHA384Data(const u_char *data, size_t len, char *buf)
+SHA384Data(const unsigned char *data, size_t len, char *buf)
 {
 	SHA2_CTX ctx;
 
@@ -1125,7 +1125,7 @@ SHA384Data(const u_char *data, size_t len, char *buf)
 }
 
 char *
-SHA512Data(const u_char *data, size_t len, char *buf)
+SHA512Data(const unsigned char *data, size_t len, char *buf)
 {
 	SHA2_CTX ctx;
 
